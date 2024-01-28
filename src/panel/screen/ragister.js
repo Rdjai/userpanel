@@ -1,72 +1,134 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ragister.css';
-
-import logo from '../../assest/logo-light.jpg'
+import './register.css';
+import logo from '../../assets/logo-light.jpg';
 import { Link } from 'react-router-dom';
 
-const RagisterAccount = () => {
-    return (
-        <div className="login-wrp">
-            <div className="top">
-                <div className="logo">
-                    <img
-                        src={logo}
-                        alt=""
-                        width="100px"
-                    />
-                </div>
-            </div>
-            <div className="bottom">
-                <form action="" className="login-form">
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="referral Id"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Name" />
-                    </div>
-                    <div className="form-group">
-                        <input type="number" className="form-control" placeholder="mobile Number" />
-                    </div>
-                    <div className="form-group">
-                        <input type="email" className="form-control" placeholder="xyz@gmail.com" />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            className="form-control"
-                            placeholder="Password"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input type="number" className="form-control" placeholder="area Pincode" />
-                    </div>
+const RegisterAccount = () => {
+  const [formData, setFormData] = useState({
+    referralPin: '',
+    name: '',
+    mobileNumber: '',
+    email: '',
+    password: '',
+    areaPincode: '',
+  });
 
-                    {/*          <div class="form-group">
-            <label class="checkbox-inline"><input type="checkbox" value=""> Keep me sign in</label>
-         </div> */}
-                    <a href="#" className="btn btn-primary btn-block">
-                        Login
-                    </a>
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-                    <p className="text-center">
-                        <small className='d-flex forget-create'>
-                            <Link to="#" className="btn-link ">
-                                Forgot password
-                            </Link>
-                            <Link to="/login" className="btn-link">
-                                Login Account
-                            </Link>
-                        </small>
-                    </p>
-                </form>
-            </div>
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3001/users/Register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Registration successful, handle success (e.g., redirect to login page)
+        console.log('User registered successfully');
+      } else {
+        // Registration failed, handle error
+        console.error('Error registering user:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
+  };
+
+  return (
+    <div className="login-wrp">
+      <div className="top">
+        <div className="logo">
+          <img src={logo} alt="" width="100px" />
         </div>
-    );
+      </div>
+      <div className="bottom">
+        <form action="" className="login-form" onSubmit={handleRegistration}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="referralPin"
+              className="form-control"
+              placeholder="Referral Pin"
+              value={formData.referralPin}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              className="form-control"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="number"
+              name="mobileNumber"
+              className="form-control"
+              placeholder="Mobile Number"
+              value={formData.mobileNumber}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              placeholder="xyz@gmail.com"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="number"
+              name="areaPincode"
+              className="form-control"
+              placeholder="Area Pincode"
+              value={formData.areaPincode}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary btn-block">
+            Register
+          </button>
+          <p className="text-center">
+            <small className="d-flex forget-create">
+              <Link to="#" className="btn-link">
+                Forgot password
+              </Link>
+              <Link to="/login" className="btn-link">
+                Login Account
+              </Link>
+            </small>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 };
 
-export default RagisterAccount;
+export default RegisterAccount;
