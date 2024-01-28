@@ -671,3 +671,8 @@ footer.sticky-footer {
     color: #fff;
     /* Text color for active link */
 }
+
+.nav-btn-no-style {
+    background-color: #ffffff00;
+    border: #ffffff00;
+}
