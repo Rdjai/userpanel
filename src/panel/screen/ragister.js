@@ -119,7 +119,7 @@ const RegisterAccount = () => {
               <Link to="#" className="btn-link">
                 Forgot password
               </Link>
-              <Link to="/login" className="btn-link">
+              <Link to="/" className="btn-link">
                 Login Account
               </Link>
             </small>

@@ -46,7 +46,7 @@ const Home = () => {
             <div className="app-main">
                 <SideBar />
                 <div className="app-main__outer">
-                    {renderContent()}
+                    <MainCompnent />
                 </div>
 
             </div>

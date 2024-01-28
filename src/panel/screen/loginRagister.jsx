@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './login.css'; // Import your custom CSS file
+import './css/login.css'; // Import your custom CSS file
 import { Link } from 'react-router-dom';
 import logo from '../../assest/logo-light.jpg'
 

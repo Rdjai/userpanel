@@ -5,7 +5,7 @@ import NavBarComponent from '../navbar'
 import SideBar from '../sidebar'
 import { Image } from 'react-bootstrap'
 import upiImg from '../../../assest/upi.png'
-const Epin = () => {
+const DipositScreen = () => {
     return (
         <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 
@@ -17,7 +17,7 @@ const Epin = () => {
                 <div className="container my-5 mx-auto">
                     <div className="row justify-content-center">
                         <div className="col-lg-9">
-                            <h1 className="mb-3">Perchase E-pin</h1>
+                            <h1 className="mb-3">Deposit Money</h1>
                             <form>
                                 <div className="row g-3">
                                     <div className="col-md-6">
@@ -119,4 +119,4 @@ const Epin = () => {
     )
 }
 
-export default Epin
+export default DipositScreen

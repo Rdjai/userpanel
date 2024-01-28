@@ -12,66 +12,135 @@ const TaskScreen = () => {
             <UiTheme />
             <div className="app-main ">
                 <SideBar />
-                <>
-                    <div className="container my-5">
-                        <div className="col-md-5 mt-5 mt-md-0 d-none d-md-block m-auto">
-                            <div className="bg-body shadow p-4 rounded-3 d-inline-block position-relative">
-                                {/* Icon */}
-                                <div className="icon-lg bg-warning rounded-circle position-absolute top-0 start-100 translate-middle">
-                                    <i className="bi bi-shield-fill-check text-dark" />
-                                </div>
-                                {/* Title */}
-                                <h6 className="mb-3">100+ Verified Mentors</h6>
-                                {/* Mentor Item */}
-                                <div className="d-flex align-items-center mb-3">
-                                    {/* Avatar */}
-                                    <div className="avatar avatar-sm">
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <button class="btn btn-success w-100">Success</button>
-                                        </div>
-                                    </div>
-                                    {/* Info */}
-
-                                </div>
-                                {/* Mentor Item */}
-                                <div className="d-flex align-items-center mb-3">
-                                    {/* Avatar */}
-                                    <div className="avatar avatar-sm">
-                                        <img
-                                            className="avatar-img rounded-1"
-                                            src="assets/images/avatar/04.jpg"
-                                            alt="avatar"
-                                        />
-                                    </div>
-                                    {/* Info */}
-                                    <div className="ms-2">
-                                        <h6 className="mb-0">Billy Vasquez</h6>
-                                        <p className="mb-0 small">Tutor of chemistry</p>
-                                    </div>
-                                </div>
-                                {/* Mentor Item */}
-                                <div className="d-flex align-items-center">
-                                    {/* Avatar */}
-                                    <div className="avatar avatar-sm">
-                                        <img
-                                            className="avatar-img rounded-1"
-                                            src="assets/images/avatar/02.jpg"
-                                            alt="avatar"
-                                        />
-                                    </div>
-                                    {/* Info */}
-                                    <div className="ms-2">
-                                        <h6 className="mb-0">Larry Lawson</h6>
-                                        <p className="mb-0 small">Tutor of technology</p>
-                                    </div>
+                <div className="container my-5 mx-auto">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-9">
+                            <div className='d-flex justify-content-around text-success ms-5'>
+                                <h1 className="mb-3">Your Task</h1>
+                                <div className="col-12 mt-3 mb-1">
+                                    <h3 className="text-uppercase text-bold">Earn Extra Money</h3>
+                                    <p className="text-uppercase text-bold fs-5">Just Complete some Task &amp; And Get Reward.</p>
                                 </div>
                             </div>
+                            <div className="grey-bg container-fluid">
+
+                                <section id="stats-subtitle">
+                                    <div className="row">
+
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xl-12 col-md-12">
+                                            <div className="card overflow-hidden">
+                                                <div className="card-content">
+                                                    <div className="card-body cleartfix">
+                                                        <div className="media align-items-stretch">
+                                                            <div className="align-self-center">
+                                                                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/play-button-circled--v1.png" alt="play-button-circled--v1" />
+
+                                                            </div>
+                                                            <div className="media-body ms-5">
+                                                                <h4>Watch Ad</h4>
+                                                                <span>Earn Extra Money</span>
+                                                            </div>
+                                                            <div className="align-self-center">
+                                                                <h1>50</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-12 col-md-12">
+                                            <div className="card">
+                                                <div className="card-content">
+                                                    <div className="card-body cleartfix">
+                                                        <div className="media align-items-stretch">
+                                                            <div className="align-self-center">
+                                                                <img width="50" height="50" src="https://img.icons8.com/material-rounded/24/download--v1.png" alt="download--v1" />
+                                                            </div>
+                                                            <div className="media-body ms-5">
+                                                                <h4>Download App</h4>
+                                                                <span>Download App and Use 5 min</span>
+                                                            </div>
+                                                            <div className="align-self-center">
+                                                                <h1>120</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xl-12 col-md-12">
+                                            <div className="card">
+                                                <div className="card-content">
+                                                    <div className="card-body cleartfix">
+                                                        <div className="media align-items-stretch">
+                                                            <div className="align-self-center">
+                                                                <img width="50" height="50" src="https://img.icons8.com/ios/50/domain--v1.png" alt="domain--v1" />
+                                                            </div>
+                                                            <div className="media-body ms-5">
+                                                                <h4>Visite Website</h4>
+                                                                <span>Visite website And earn Extra</span>
+                                                            </div>
+                                                            <div className="align-self-center">
+                                                                <h1>90</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-12 col-md-12">
+                                            <div className="card">
+                                                <div className="card-content">
+                                                    <div className="card-body cleartfix">
+                                                        <div className="media align-items-stretch">
+                                                            <div className="align-self-center">
+                                                                <img width="64" height="64" src="https://img.icons8.com/external-bearicons-gradient-bearicons/64/external-Subscribe-social-media-bearicons-gradient-bearicons.png" alt="external-Subscribe-social-media-bearicons-gradient-bearicons" />
+                                                            </div>
+                                                            <div className="media-body ms-5">
+                                                                <h4>Subscribe Channel</h4>
+                                                                <span>Subscribe channels And earn Extra</span>
+                                                            </div>
+                                                            <div className="align-self-center">
+                                                                <h1>90</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-xl-12 col-md-12">
+                                            <div className="card">
+                                                <div className="card-content">
+                                                    <div className="card-body cleartfix">
+                                                        <div className="media align-items-stretch">
+                                                            <div className="align-self-center">
+                                                                <h1 className="mr-2">$36,000.00</h1>
+                                                            </div>
+                                                            <div className="media-body">
+                                                                <h4>Total Cost</h4>
+                                                                <span>Monthly Cost</span>
+                                                            </div>
+                                                            <div className="align-self-center">
+                                                                <i className="icon-wallet success font-large-2" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
                         </div>
-
                     </div>
+                </div>
 
-
-                </>
 
 
             </div>
