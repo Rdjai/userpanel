@@ -29,7 +29,7 @@ const AccountCriteria = () => {
                         />
                     </div>
 
-                    <Link to="/" className="btn btn-primary btn-block">
+                    <Link to="/dashboard" className="btn btn-primary btn-block">
                         Login
                     </Link>
 

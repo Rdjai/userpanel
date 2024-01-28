@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './register.css';
-import logo from '../../assets/logo-light.jpg';
+import logo from '../../assest/logo-light.jpg';
 import { Link } from 'react-router-dom';
-
+import './ragister.css'
 const RegisterAccount = () => {
   const [formData, setFormData] = useState({
     referralPin: '',
@@ -23,7 +22,7 @@ const RegisterAccount = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/users/Register', {
+      const response = await fetch('http://localhost:5000/users/Register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

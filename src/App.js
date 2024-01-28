@@ -11,8 +11,8 @@ import TaskScreen from './panel/homeScreen/component/task';
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<AccountCriteria />} />
+      <Route path="/dashboard" element={<Home />} />
+      <Route path="/" element={<AccountCriteria />} />
       <Route path="/ragister" element={<RagisterAccount />} />
       <Route path="/BankTransfer" element={<BankTransfer />} />
       <Route path="/Epin" element={<Epin />} />
