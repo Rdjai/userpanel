@@ -79,6 +79,18 @@ const Epin = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="container">
+                                            <div className="row">
+                                                <div className="col-12 col-md-12">
+
+                                                    <h6>Perchase E-pin</h6>
+
+
+                                                    QR CODE
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="col-12">
                                             <div className="row">
                                                 <div className="col-md-6">
