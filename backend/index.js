@@ -14,8 +14,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('hii');
 });
-const authRoutes = require('./Routes/register');
+const authRoutes = require('./Routes/Allapis');
 app.use('/users', authRoutes);
+// app.use('/users', authRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

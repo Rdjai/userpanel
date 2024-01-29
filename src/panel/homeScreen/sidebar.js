@@ -39,8 +39,10 @@ const SideBar = () => {
                             <Image src="https://script.viserlab.com/mlmlab/assets/templates/basic/users/images/icon/bv_log.png" alt="icon" /> Task           </Link>
                     </li>
                     <li>
+                        
                         <Link to='/team'>
                             <Image src="https://script.viserlab.com/mlmlab/assets/templates/basic/users/images/icon/referral.png" alt="icon" /> My Referrals       </Link>
+                 
                     </li>
 
 

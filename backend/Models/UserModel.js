@@ -1,4 +1,3 @@
-// models/userModel.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -26,6 +25,18 @@ const userSchema = new mongoose.Schema({
   referralPin: {
     type: String,
   },
+  parentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the parent user
+  },
+  left: {
+    type: Boolean, // Indicate if the user is a left or right child
+    default: false,
+  },
+  children: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Array to store child user IDs
+  }],
 });
 
 const User = mongoose.model('User', userSchema);
