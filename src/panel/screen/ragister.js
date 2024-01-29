@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../assest/logo-light.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ragister.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 const RegisterAccount = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     referralPin: '',
     name: '',
@@ -13,36 +19,59 @@ const RegisterAccount = () => {
     areaPincode: '',
   });
 
+
+  // console.log(formData.mobileNumber === 10);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleRegistration = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('http://localhost:5000/users/Register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    if (formData.mobileNumber.length == 10) {
+      try {
+        console.log('Request Payload:', JSON.stringify(formData));
 
-      if (response.ok) {
-        // Registration successful, handle success (e.g., redirect to login page)
-        console.log('User registered successfully');
-      } else {
-        // Registration failed, handle error
-        console.error('Error registering user:', response.statusText);
+        const response = await fetch('http://localhost:5000/users/Register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+
+        if (response.ok) {
+
+          toast.success('Registration successful!');
+
+          console.log('User registered successfully');
+          setTimeout(() => {
+            navigate("/")
+          }, 1500);
+        } else {
+
+          const errorData = await response.json();
+          toast.error('Registration failed: ' + errorData.message);
+          console.error('Error registering user:', response.status, errorData);
+        }
+      } catch (error) {
+        console.error('Error registering user:', error);
+        toast.error('Error registering user: ', + error);
+      } finally {
       }
-    } catch (error) {
-      console.error('Error registering user:', error);
+    } else {
+      toast.error("enter correct number");
+
     }
+
   };
 
   return (
+
+    // <ToastContainer >
+
     <div className="login-wrp">
       <div className="top">
         <div className="logo">
@@ -59,6 +88,7 @@ const RegisterAccount = () => {
               placeholder="Referral Pin"
               value={formData.referralPin}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -69,6 +99,8 @@ const RegisterAccount = () => {
               placeholder="Name"
               value={formData.name}
               onChange={handleInputChange}
+              required
+
             />
           </div>
           <div className="form-group">
@@ -79,6 +111,8 @@ const RegisterAccount = () => {
               placeholder="Mobile Number"
               value={formData.mobileNumber}
               onChange={handleInputChange}
+              required
+
             />
           </div>
           <div className="form-group">
@@ -89,6 +123,8 @@ const RegisterAccount = () => {
               placeholder="xyz@gmail.com"
               value={formData.email}
               onChange={handleInputChange}
+              required
+
             />
           </div>
           <div className="form-group">
@@ -99,6 +135,8 @@ const RegisterAccount = () => {
               placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
+              required
+
             />
           </div>
           <div className="form-group">
@@ -109,6 +147,8 @@ const RegisterAccount = () => {
               placeholder="Area Pincode"
               value={formData.areaPincode}
               onChange={handleInputChange}
+              required
+
             />
           </div>
           <button type="submit" className="btn btn-primary btn-block">
@@ -126,7 +166,9 @@ const RegisterAccount = () => {
           </p>
         </form>
       </div>
-    </div>
+      <ToastContainer />
+
+    </div >
   );
 };
 
