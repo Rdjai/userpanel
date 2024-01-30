@@ -1,13 +1,14 @@
 // Import necessary modules and services
 const express = require('express');
+const axios = require('axios');
+
+const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../Models/UserModel');
-const jwt = require('jsonwebtoken');
-const { calculateAndPayBonuses } = require('../Utils/BonusService');
+const updateLevelIncome = require('./IncomeRout'); // Import the function that updates level income
+const levelIncomeService = require('../Utils/levelincome');
 
-
-const router = express.Router();
 
 // Registration route
 router.post('/register', [
@@ -36,7 +37,7 @@ router.post('/register', [
       ...req.body,
     });
 
-    let parentUser = null; // Declare parentUser outside the try block
+    let parentUser = null;
 
     if (req.body.referralPin) {
       parentUser = await User.findOne({ referralPin: req.body.referralPin });
@@ -44,10 +45,6 @@ router.post('/register', [
       if (!parentUser) {
         return res.status(400).json({ message: 'Invalid referral pin' });
       }
-
-      // if (parentUser.children.length >=20000) {
-      //   return res.status(400).json({ message: 'Parent user has reached maximum children' });
-      // }
 
       const isLeftChild = parentUser.children.length === 0 || parentUser.children[0]?.left;
 
@@ -57,16 +54,19 @@ router.post('/register', [
 
     await newUser.save();
 
+    // Calculate and store initial level income during registration
+    const initialLevelIncome = await levelIncomeService.calculateAndStoreInitialLevelIncome(newUser._id);
+
     const referralPin = generateReferralPin(newUser.name, newUser.mobileNumber);
     await User.findByIdAndUpdate(newUser._id, { referralPin });
 
     if (newUser.parentId) {
       parentUser.children.push(newUser._id);
       await parentUser.save();
-      // await BonusService.calculateAndPayBonuses(newUser, parentUser);
+       const initialLevelIncome = await levelIncomeService.calculateAndStoreInitialLevelIncome(newUser._id);
     }
 
-    res.status(201).json({ message: 'User registered successfully', referralPin });
+    res.status(201).json({ message: 'User registered successfully', referralPin, initialLevelIncome });
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ message: 'Internal server error' });

@@ -15,7 +15,9 @@ app.get('/', (req, res) => {
   res.send('hii');
 });
 const authRoutes = require('./Routes/Allapis');
+const incomeroute = require('./Routes/IncomeRout');
 app.use('/users', authRoutes);
+app.use('/users', incomeroute);
 // app.use('/users', authRoutes);
 
 app.listen(port, () => {
