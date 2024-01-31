@@ -1,18 +1,16 @@
-// Import necessary modules and services
 const express = require('express');
 const axios = require('axios');
-
-const router = express.Router();
+const jwt = require('jsonwebtoken'); // Import the jwt module
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../Models/UserModel');
-const updateLevelIncome = require('./IncomeRout'); // Import the function that updates level income
+const updateLevelIncome = require('./IncomeRout');
 const levelIncomeService = require('../Utils/levelincome');
 
+const router = express.Router();
 
 // Registration route
 router.post('/register', [
-  // Validation middleware using express-validator
   body('name').notEmpty().withMessage('Name is required'),
   body('mobileNumber').notEmpty().withMessage('Mobile Number is required'),
   body('email').isEmail().withMessage('Invalid email format'),
@@ -63,7 +61,6 @@ router.post('/register', [
     if (newUser.parentId) {
       parentUser.children.push(newUser._id);
       await parentUser.save();
-       const initialLevelIncome = await levelIncomeService.calculateAndStoreInitialLevelIncome(newUser._id);
     }
 
     res.status(201).json({ message: 'User registered successfully', referralPin, initialLevelIncome });
@@ -75,18 +72,16 @@ router.post('/register', [
 
 // Function to generate referral pin
 function generateReferralPin(name, mobileNumber) {
-  const namePrefix = name.substring(0, 3).toUpperCase(); // Get first 3 letters, uppercase
-  const mobileSuffix = mobileNumber.substring(0, 5); // Get first 5 digits
-  return `${namePrefix}${mobileSuffix}`; // Combine and return
+  const namePrefix = name.substring(0, 3).toUpperCase();
+  const mobileSuffix = mobileNumber.substring(0, 5);
+  return `${namePrefix}${mobileSuffix}`;
 }
 
 // Route for user login (using mobile number)
 router.post('/login', [
-  // Validation middleware using express-validator
   body('mobileNumber').notEmpty().withMessage('Mobile Number is required'),
   body('password').notEmpty().withMessage('Password is required'),
 ], async (req, res) => {
-  // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -99,12 +94,12 @@ router.post('/login', [
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Compare the provided password with the stored hashed password
-    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-    if (!passwordMatch) {
+    // Compare the provided password directly (without hashing)
+    if (req.body.password !== user.password) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // Generate a JWT token
     const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
     // Return the token as part of the response

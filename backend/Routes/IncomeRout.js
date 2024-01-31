@@ -1,29 +1,31 @@
+// Import necessary modules and services
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 const User = require('../Models/UserModel');
+const Income = require('../Models/IncomeModel');
 
-async function updateLevelIncome(userId) {
-  const user = await User.findById(userId);
-  const childrenSize = user.children.length;
-  let incomeIncrease = 0;
-  let level= 1;
 
-  if (childrenSize >= 4) {
-      level=2;
-    incomeIncrease = 0.015;
-  } else if (childrenSize >= 20000) {
-    level=3;
-    incomeIncrease = 0.03;
-  } else if (childrenSize >= 10000) {
-    level=4;
-    incomeIncrease = 0.04;
-  } else if (childrenSize >= 3000) {
-    level=5;
-    incomeIncrease = 0.05;
+
+router.post('/ad-view', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    // Find or create the Income record for the user
+    const income = await Income.findOne({ userId });
+    if (!income) {
+      const newIncome = new Income({ userId });
+      await newIncome.save();
+    }
+
+    // Increment ad view income by 50 rupees
+    await Income.findOneAndUpdate({ userId }, { $inc: { adViewIncome: 50 } });
+
+    res.json({ message: 'Ad view counted successfully' });
+  } catch (error) {
+    console.error('Error counting ad view:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
+});
 
-  const newIncome = user.amount + (user.amount * incomeIncrease);
-  await User.findByIdAndUpdate(userId, { income: newIncome });
-}
-
-
+module.exports = router;

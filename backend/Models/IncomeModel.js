@@ -1,28 +1,22 @@
+// models/incomeModel.js
 const mongoose = require('mongoose');
 
-const IncomeSchema = new mongoose.Schema({
+const incomeSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
-    ref: 'User', // Reference to the User model
   },
-  type: {
-    type: String,
-    required: true,
-    enum: ['levelIncome', 'adViewIncome', 'rewardIncome', 'other'], // Defined allowed income types
-  },
-  amount: {
+  adViewIncome: {
     type: Number,
-    required: true,
-    min: 0,
+    default: 0,
   },
-  timestamp: {
-    type: Date,
-    default: Date.now,
-  },
-  description: {
-    type: String,
+  rewardIncome: {
+    type: Number,
+    default: 0,
   },
 });
 
-module.exports = mongoose.model('Income', IncomeSchema);
+const Income = mongoose.model('Income', incomeSchema);
+
+module.exports = Income;
