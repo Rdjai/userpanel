@@ -1,4 +1,5 @@
-require('dotenv').config();
+// app.js or server.js
+
 const express = require('express');
 const cors = require('cors');
 const connectToDatabase = require('./db');
@@ -16,14 +17,14 @@ app.get('/', (req, res) => {
   res.send('hii');
 });
 
-const authRoutes = require('./Routes/Allapis');
+const userRoutes = require('./Routes/Allapis');
 const incomeRoutes = require('./Routes/IncomeRout');
+const getUserRoutes = require('./Routes/Getuser');
 
-// Mount the auth routes under '/auth'
-app.use('/users', authRoutes);
-
-// Mount the income routes under '/income'
-app.use('/income', incomeRoutes);
+// Mount the routes
+app.use('/api/v1', userRoutes);
+app.use('/api/v2', incomeRoutes);
+app.use('/api/v3', getUserRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

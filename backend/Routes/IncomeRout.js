@@ -6,7 +6,7 @@ const User = require('../Models/UserModel');
 const Income = require('../Models/IncomeModel');
 
 // Increment ad view income by 50 rupees
-router.post('/ad-view', async (req, res) => {
+router.post('/adView', async (req, res) => {
   const { userId } = req.body;
 
   try {
@@ -27,7 +27,7 @@ router.post('/ad-view', async (req, res) => {
 });
 
 // Get ad view income for a user
-router.get('/ad-view/:userId', async (req, res) => {
+router.get('/adview/:userId', async (req, res) => {
   const { userId } = req.params;
 
   try {
