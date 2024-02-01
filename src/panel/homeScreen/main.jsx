@@ -1,9 +1,37 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 const MainCompnent = () => {
+    const [userData, setUserData] = useState([]);
+    const token = localStorage.getItem('token');
+    console.log("ye hai", token);
+    useEffect(() => {
+        const fetchDataWithToken = async (token) => {
+            try {
+                const response = await axios.get('http://localhost:5000/users/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                console.log('ye hi daat:', response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        };
+    }, 1000);
+
     return (
 
         <div className="app-main__inner">
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-sm-6 p-2">
+                        <button className="btn btn-primary btn-block"> <a href="https://whatsapp.com/channel/0029VaLLtod9MF93RGMu4s1F" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "white" }}>Whatsapp</a></button>
+                    </div>
+                    <div className="col-12 col-sm-6 p-2">
+                        <button className="btn btn-secondary btn-block"><a href="https://t.me/nimcetzonecrack2024" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "white" }}>Telegram</a></button>
+                    </div>
+                </div>
+            </div>
             <div className='m-2 text-secondary border-text-secondary'>
                 <p className="alert alert-warning">Some text success or error Dynamic</p>
             </div>

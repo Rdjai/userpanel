@@ -13,71 +13,55 @@ const TaskScreen = () => {
             <UiTheme />
             <div className="app-main ">
                 <SideBar />
-                <div className="container my-5 mx-auto">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-9">
-                            <div className='d-flex justify-content-around text-success'>
-                                <div className="col-12  mb-1">
-                                    <h3 className="text-uppercase text-bold">Your All Transactions is here </h3>
-                                </div>
-                            </div>
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <table className="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">List</th>
-                                                    <th scope="col">Payment Method</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Total payment</th>
-                                                    <th scope="col">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>UPI</td>
-                                                    <td>Cristina</td>
-                                                    <td>₹ 12126</td>
-                                                    <td>
-                                                        <h5 className='text-success'>success</h5>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>UPI</td>
-                                                    <td>Cristina</td>
-                                                    <td> ₹ 12126</td>
-                                                    <td>
-                                                        <h5 className='text-danger'>success</h5>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>UPI</td>
-                                                    <td>Cristina</td>
-                                                    <td> ₹ 12126</td>
-                                                    <td>
-                                                        <h5 className='text-success'>success</h5>
-                                                    </td>
-                                                </tr>
+                <div className="container mx-auto p-1">
 
+                    <h1 className="text-center pt-4">
+                        Payment History
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    </h1>
+                    <div className="container table-responsive py-5">
+                        <table className="table table-bordered table-hover">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">PAYMENT METHOD</th>
+                                    <th scope="col">TOTAL PAYMENT</th>
+                                    <th scope="col">STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>UPI</td>
+                                    <td>1200</td>
+                                    <td className='text-success'>success</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>UPI</td>
+                                    <td>12000</td>
+                                    <td className='text-warning'>pending</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>UPI</td>
+                                    <td>12000</td>
+                                    <td className='text-danger'>pending</td>
+                                </tr>
 
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
+
+
+
                 </div>
-
-
-
             </div>
         </div>
+
+
+
+
     )
 }
 

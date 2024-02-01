@@ -13,7 +13,7 @@ const TicketScreen = () => {
             <UiTheme />
             <div className="app-main ">
                 <SideBar />
-                <div className="container my-5 mx-auto">
+                <div className="container p-5 mx-auto">
                     <div className="row justify-content-center">
 
                         <div className="container my-5">

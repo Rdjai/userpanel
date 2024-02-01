@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/login.css'; // Import your custom CSS file
+import './css/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assest/logo-light.jpg'
 import Button from 'react-bootstrap/Button';
@@ -32,7 +32,14 @@ const AccountCriteria = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
-            });
+            })
+            const data = await response.json();
+            // console.log("id", data.token);
+            localStorage.setItem('token', data.token);
+
+            console.log("this is ", data._id);
+
+
 
 
             if (response.ok) {
@@ -43,7 +50,7 @@ const AccountCriteria = () => {
                 console.log('User Login successfully');
                 setTimeout(() => {
                     navigate("/dashboard")
-                }, 1500);
+                }, 1000);
             } else {
                 // Login failed, handle error
                 const errorData = await response.json();
@@ -53,7 +60,10 @@ const AccountCriteria = () => {
             }
         } catch (error) {
             console.error('Error logging in:', error);
-            toast.error('Error registering user: ', + error);
+            toast.error(error.message);
+            setTimeout(() => {
+                toast.success("we are working on it , fixed it ASAP");
+            }, 1000);
         }
     };
 

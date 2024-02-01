@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const User = require('../Models/UserModel');
 const updateLevelIncome = require('./IncomeRout');
 const levelIncomeService = require('../Utils/levelincome');
+const authenticateUser = require('../middleware/Aunthenticater');
 
 const router = express.Router();
 
@@ -109,5 +110,8 @@ router.post('/login', [
     res.status(500).json({ message: 'Internal server error for login' });
   }
 });
+
+
+router.route('/user').get(authenticateUser.user)
 
 module.exports = router;

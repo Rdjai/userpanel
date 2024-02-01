@@ -14,7 +14,7 @@ const Epin = () => {
             <UiTheme />
             <div className="app-main ">
                 <SideBar />
-                <div className="container my-5 mx-auto">
+                <div className="container my-5 mx-auto p-5">
                     <div className="row justify-content-center">
                         <div className="col-lg-9">
                             <h1 className="mb-3">Perchase E-pin</h1>

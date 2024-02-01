@@ -16,11 +16,11 @@ const TaskScreen = () => {
                     <div className="row justify-content-center">
                         <div className="col-lg-9">
                             <div className='d-flex justify-content-around text-success ms-5'>
-                                <h1 className="mb-3">Your Task</h1>
-                                <div className="col-12 mt-3 mb-1">
-                                    <h3 className="text-uppercase text-bold">Earn Extra Money</h3>
-                                    <p className="text-uppercase text-bold fs-5">Just Complete some Task &amp; And Get Reward.</p>
-                                </div>
+
+
+                                <h3 className="text-uppercase text-bold">Earn Extra Money</h3>
+                                <p className="text-uppercase text-bold fs-5">Just Complete some Task &amp; And Get Reward.</p>
+
                             </div>
                             <div className="grey-bg container-fluid">
 
@@ -144,7 +144,7 @@ const TaskScreen = () => {
 
 
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -568,9 +568,7 @@ footer.sticky-footer {
 .sidebar-menu li {
     padding: 15px;
     border-bottom: 1px solid #ddd;
-    /* Border color between menu items */
     transition: background-color 0.3s ease;
-    /* Add transition for smooth hover effects */
 }
 
 .sidebar-menu li:last-child {
@@ -676,5 +674,19 @@ footer.sticky-footer {
 
 .nav-btn-no-style {
     background-color: #ffffff00;
-    border: #ffffff00;
+
+}
+
+.vertical-nav-menu {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    overflow-y: scroll;
+    /* Enable vertical scrolling for the container */
+
+}
+
+.vertical-nav-menu ::-webkit-scrollbar {
+    display: none;
+    /* WebKit (Chrome, Safari, Edge) */
 }

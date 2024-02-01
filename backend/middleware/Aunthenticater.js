@@ -19,4 +19,16 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+
+//user logic
+const user = async (req, res) => {
+  try {
+    // const userData = req.user;
+    // console.log(userData);
+    res.status(200).json({ msg: "hey user" })
+  } catch (err) {
+    console.log(`error from the user route ${err}`);
+  }
+}
+
 module.exports = authenticateUser;
