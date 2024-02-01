@@ -109,5 +109,4 @@ router.post('/login', [
     res.status(500).json({ message: 'Internal server error for login' });
   }
 });
-
 module.exports = router;
