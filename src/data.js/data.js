@@ -46,22 +46,25 @@ const TeamList = () => {
 
         const fetchChildrenData = async (childrenIds) => {
             try {
-                const response = await fetch('http://localhost:5000/api/v3/childrenData', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ childrenIds }),
+                const promises = childrenIds.map(async (childId) => {
+                    const response = await fetch(`http://localhost:5000/api/v3/userdetails/${childId}`, {
+                        method: 'GET',
+                        headers: {
+                            Authorization: `${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        console.error('Error fetching child data:', response.statusText);
+                        return null;
+                    }
                 });
 
-                if (response.ok) {
-                    const childrenData = await response.json();
-                    console.log('Children Data:', childrenData);
-                    setChildrenData(childrenData);
-                } else {
-                    console.error('Error fetching children data:', response.statusText);
-                }
+                const childrenResults = await Promise.all(promises);
+                setChildrenData(childrenResults.filter((data) => data !== null));
             } catch (error) {
                 console.error('Error fetching children data:', error);
             }
@@ -87,30 +90,64 @@ const TeamList = () => {
     if (error) {
         return <p>Error: {error}</p>;
     }
-
     return (
         <div>
             <div>
-                <h2>User Data</h2>
-                <p>Name: {userData.user.name}</p>
-                <p>Mobile Number: {userData.user.mobileNumber}</p>
-                <p>Email: {userData.user.email}</p>
-                {/* Add more user data fields as needed */}
+                <h2>My Information</h2>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">referral Pin</th>
+
+                            <th scope="col">Name</th>
+                            <th scope="col">Mobile Number</th>
+
+
+                            {/* Add more user data fields as needed */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{userData.user.referralPin}</td>
+
+                            <td>{userData.user.name}</td>
+                            <td>{userData.user.mobileNumber}</td>
+                            {/* Add more user data fields as needed */}
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div>
-                <h2>Children Data</h2>
-                {childrenData.map((child) => (
-                    <div key={child._id}>
-                        <p>Name: {child.name}</p>
-                        <p>Mobile Number: {child.mobileNumber}</p>
-                        <p>Email: {child.email}</p>
-                        {/* Add more children data fields as needed */}
-                    </div>
-                ))}
+                <h2>My Team Details</h2>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Mobile Number</th>
+                            <th scope="col">Email</th>
+                            {/* Add more children data fields as needed */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {childrenData.map((child, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{child.user.name}</td>
+                                <td>{child.user.referralPin}</td>
+                                <td>{child.user.email}</td>
+                                {/* Add more children data fields as needed */}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
+
 };
 
 export default TeamList;

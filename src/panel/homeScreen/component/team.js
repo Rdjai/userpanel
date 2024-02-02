@@ -3,6 +3,7 @@ import './PAYMENT.CSS'
 import UiTheme from '../uitheme'
 import NavBarComponent from '../navbar'
 import SideBar from '../sidebar'
+import TeamList from '../../../data.js/data'
 
 const TeamScreen = () => {
     return (
@@ -22,7 +23,7 @@ const TeamScreen = () => {
                             >
                                 <strong>Your Team Become number 1:</strong>Work hard and referal anf Build your Team →
                             </p>
-                            <div className="p-10 bg-surface-secondary">
+                            {/* <div className="p-10 bg-surface-secondary">
                                 <div className="container">
                                     <div className="card">
                                         <div className="card-header">
@@ -357,7 +358,8 @@ const TeamScreen = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <TeamList />
 
                         </div>
                     </div>
