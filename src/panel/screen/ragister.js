@@ -33,7 +33,7 @@ const RegisterAccount = () => {
       try {
         console.log('Request Payload:', JSON.stringify(formData));
 
-        const response = await fetch('http://localhost:5000/users/Register', {
+        const response = await fetch('http://localhost:5000/api/v1/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const RegisterAccount = () => {
           console.log('User registered successfully');
           setTimeout(() => {
             navigate("/")
-          }, 1500);
+          }, 1000);
         } else {
 
           const errorData = await response.json();
@@ -57,7 +57,9 @@ const RegisterAccount = () => {
           console.error('Error registering user:', response.status, errorData);
         }
       } catch (error) {
-        console.error('Error registering user:', error);
+        // const err = error.json
+
+        // console.error('Error registering user:', error);
         toast.error('Error registering user: ', + error);
       } finally {
       }

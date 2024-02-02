@@ -1,23 +1,67 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
+import { Image } from 'react-bootstrap';
+import TeamList from '../../data.js/data';
 const MainCompnent = () => {
-    const [userData, setUserData] = useState([]);
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const token = localStorage.getItem('token');
-    console.log("ye hai", token);
+
+
+
     useEffect(() => {
-        const fetchDataWithToken = async (token) => {
+
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId;
+        console.log('User ID:', userId);
+
+        const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/users/', {
+                const response = await fetch(`http://localhost:5000/api/v3/userdetails/${userId}`, {
+                    method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `${token}`,
+                        'Content-Type': 'application/json',
                     },
                 });
-                console.log('ye hi daat:', response.data);
+
+                if (response.ok) {
+
+                    const result = await response.json();
+                    console.log(result);
+                    setData(result);
+                    setLoading(false);
+
+                } else {
+                    setError('Error fetching data');
+                    setLoading(false);
+                }
             } catch (error) {
-                console.error('Error fetching data:', error.message);
+                setError('Error fetching data');
+                console.error(error);
             }
         };
-    }, 1000);
+
+        fetchData();
+    },);
+
+    if (loading) {
+        return <Image src="https://cdn.pixabay.com/animation/2023/05/02/04/29/04-29-06-428_512.gif" style={{
+            textAlign: "center",
+            justifyContent: "center",
+            margin: "auto",
+            padding: "auto"
+
+        }} />
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
+
+    const totalEarn = data?.user?.children?.length * 300 + data.income;
+
 
     return (
 
@@ -33,7 +77,7 @@ const MainCompnent = () => {
                 </div>
             </div>
             <div className='m-2 text-secondary border-text-secondary'>
-                <p className="alert alert-warning">Some text success or error Dynamic</p>
+                <p className="alert alert-warning">{data.user.email}</p>
             </div>
 
             <div className="row">
@@ -46,7 +90,7 @@ const MainCompnent = () => {
                             </div>
                             <div className="widget-content-right">
                                 <div className="widget-numbers text-white ms-2">
-                                    <span>₹</span>  <span>1896</span>
+                                    <span>₹</span>  <span>{totalEarn}</span>
                                 </div>
                             </div>
                         </div>
@@ -75,8 +119,11 @@ const MainCompnent = () => {
                             </div>
                             <div className="widget-content-right">
                                 <div className="widget-numbers text-white">
-                                    <span>₹</span>  <span>1896</span>
+                                    <span>₹</span> <span>{data?.user?.children?.length * 300}</span>
+
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -89,7 +136,8 @@ const MainCompnent = () => {
                             </div>
                             <div className="widget-content-right">
                                 <div className="widget-numbers text-white">
-                                    <span></span> 100   <span></span>
+                                    <span></span> <span>{data?.user?.children?.length}</span>
+
                                 </div>
                             </div>
                         </div>
@@ -120,7 +168,11 @@ const MainCompnent = () => {
                     </div>
                 </div>
             </div>
-            <div className="row">
+
+            <TeamList />
+
+
+            {/* <div className="row">
                 <div className="col-md-12">
                     <div className="main-card mb-3 card">
                         <div className="card-header">
@@ -283,7 +335,7 @@ const MainCompnent = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
         </div>

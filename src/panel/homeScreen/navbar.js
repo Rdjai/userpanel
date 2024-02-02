@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown, Button, Offcanvas, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import logo from '../../assest/logo-light.jpg'
+import logo from '../../assest/logo-light.jpg';
+import data from '../../data.js/data'
+
 function NavBarComponent() {
     const [showOffcanvas, setShowOffcanvas] = useState(false);
 
     const handleOffcanvas = () => setShowOffcanvas(!showOffcanvas);
+    console.log("login navbar", data?.user?.name);
 
     return (
         <>
@@ -35,7 +38,7 @@ function NavBarComponent() {
                     <Nav>
                         <Nav.Link href="#deets">More deets</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                            {data?.user?.name}
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
