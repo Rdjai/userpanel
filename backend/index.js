@@ -20,11 +20,13 @@ app.get('/', (req, res) => {
 const userRoutes = require('./Routes/Allapis');
 const incomeRoutes = require('./Routes/IncomeRout');
 const getUserRoutes = require('./Routes/Getuser');
+const Videolink = require('./Routes/Getvideolink');
 
 // Mount the routes
 app.use('/api/v1', userRoutes);
 app.use('/api/v2', incomeRoutes);
 app.use('/api/v3', getUserRoutes);
+app.use('/api/v4', Videolink);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
